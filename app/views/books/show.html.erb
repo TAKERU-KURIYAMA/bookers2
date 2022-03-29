@@ -1,0 +1,24 @@
+<h1>Book detail</h1>
+<table>
+ <tbody>
+    <tr>
+      <td>
+       <%= @bookf.title %>  
+      </td>
+      <td>
+       <%= @bookf.body %>
+      </td>
+      <td>
+        <% if @bookf.user == current_user %>
+          <%= link_to "Edit", edit_book_path(@bookf) %>
+        <% end %>
+      </td>
+      <td>
+        <% if @bookf.user == current_user %>
+          <%= link_to "Destroy", book_path(@bookf), method: :delete %>
+        <% end %>
+      </td>
+
+    </tr>
+  </tbody>
+</table>
