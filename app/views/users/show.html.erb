@@ -1,8 +1,10 @@
 <div>
   <%= image_tag @user.get_profile_image(100,100) %>
-  <h3><%= @user.name %></h3>
-  <h3><%= @user.introduction %></h3>
+  <div>
+  <span>name</span><span><%= @user.name %></span><br>
+  <span>introduction</span><span><%= @user.introduction %></span><br>
   <%= link_to "Edit", edit_user_path(current_user.id) %>
+  </div>
 </div>
 <%= render 'books/new', book: @book %>
 
