@@ -1,18 +1,66 @@
-<div>
-  <%= image_tag current_user.get_profile_image(100,100) %>
-  <div>
-  <span>name</span><span><%= current_user.name %></span><br>
-  <span>introduction</span><span><%= current_user.introduction %></span><br>
-  <%= link_to "Edit", edit_user_path(current_user.id) %>
-  </div>
-</div>
-<%= render 'books/new', book: @book %>
-<h1>Book detail</h1>
-<table>
- <tbody>
-    <tr>
+<html>
+ <head>
+    <title>Bookers2</title>
+    
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+ </head>
+ <body>
+    <main>
+   <p id="notice"></p>
+   <div class='container px-5 px-sm-0'>
+     <div>
+      <% if @book.errors.any? %>
+       <%= @book.errors.count %>errors prohibited this obj from being saved:
+        <ul>
+       <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+       <% end %>
+        </ul>
+      <% end %> 
+     </div>
+    <div class='row'>
+     <div class='col-md-3'>
+      <h2>User info</h2>
+      <table class='table'>
+       <tr><%= image_tag @bookf.user.get_profile_image(100,100), class:"attachment user profile_image fallback" %></tr>
+       <tr>
+        <th>name</th>
+        <th><%= @bookf.user.name %></th>
+       </tr>
+       <tr>
+        <th>introduction</th>
+        <th><%= @bookf.user.introduction %></th>
+       </tr>
+      </table>
+      <div class='row'>
+       <%= link_to edit_user_path(current_user.id), class:"btn btn-outline-secondary btn-block" do %>
+       <i class="fas fa-user-cog"></i>
+       <% end %>
+      </div>
+      <div>
+       <%= render 'books/new', book: @book %>
+      </div>
+     </div>
+     
+
+     <div class='col-md-8 offset-md-1'>
+      <h1>Book detail</h1>
+      <table class='table'>
+        <tr>
       <td>
-       <%= @bookf.title %>  
+         <%= image_tag @bookf.user.get_profile_image(100,100), class:"attachment user profile_image fallback" %> <br>
+         <%= link_to user_path(@bookf.user_id) do %>
+         <%= @bookf.user.name %>
+        <% end %>
+      </td>      
+      <td>
+           <%= link_to book_path(@bookf.id) do %>
+           <%= @bookf.title %>
+           <% end %>
       </td>
       <td>
        <%= @bookf.body %>
@@ -24,10 +72,15 @@
       </td>
       <td>
         <% if @bookf.user == current_user %>
-          <%= link_to "Destroy", book_path(@bookf), method: :delete %>
+          <%= link_to "Destroy", book_path(@bookf), method: :delete, "data-confirm" => "Are you sure?" %>
         <% end %>
       </td>
-
-    </tr>
-  </tbody>
-</table>
+       </tr>
+       </table>
+     </div>
+     
+    </div>
+   </div>
+  </main>
+ </body>
+</html>

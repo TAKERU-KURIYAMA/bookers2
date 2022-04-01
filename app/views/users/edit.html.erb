@@ -1,22 +1,43 @@
-<h2>プロフィール編集</h2>
+<html>
+ <head>
+    <title>Bookers2</title>
+    
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+ </head>
+ <body>
+  <main>
+    <div class='container'>
+        <div class='row'>
+        <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mb-auto">
+<h2>User info</h2>
 <%= form_with model: @user do |f| %>
   
   <p>
     <label for="inputName">Name</label>
   </p>
   <p>
-    <%= f.text_field :name, id:"inputName" %>
+    <%= f.text_field :name, id:"inputName", class:"form-control name" %>
   </p>
   <p>
     <label for=<"inputImage">Image</label></p>
   <p>
-    <%= f.file_field :profile_image, id:"inputImage", accept: "image/*" %>  
+    <%= f.file_field :profile_image, id:"inputImage", accept: "image/*", class:"form-control-file user_image" %>  
   </p>
   <p>
     <label for="inputIntroduction">Introduction</label></p>
   </p>
   <p>
-    <%= f.text_area :Introduction, id:"inputIntroduction" %>
+    <%= f.text_area :Introduction, id:"inputIntroduction", class:"form-control introduction" %>
   </p>
-  <%= f.submit "Update User" %>
+  <%= f.submit "Update User", class:"btn btn-secondary" %>
 <% end %>
+ </div>
+        </div>
+        </div>
+      <main class="mb-auto">
+    </body>
+  </html>

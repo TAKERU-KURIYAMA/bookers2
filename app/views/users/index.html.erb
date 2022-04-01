@@ -1,15 +1,55 @@
-<div>
-  <%= image_tag current_user.get_profile_image(100,100) %>
-  <div>
-  <span>name</span><span><%= current_user.name %></span><br>
-  <span>introduction</span><span><%= current_user.introduction %></span><br>
-  <%= link_to "Edit", edit_user_path(current_user.id) %>
-  </div>
-</div>
-<%= render 'books/new', book: @book %>
+<html>
+ <head>
+    <title>Bookers2</title>
+    
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+ </head>
+ <body>
+  <main>
+   <p id="notice"></p>
+   <div class='container px-5 px-sm-0'>
+     <div>
+      <% if @book.errors.any? %>
+       <%= @book.errors.count %>errors prohibited this obj from being saved:
+        <ul>
+       <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+       <% end %>
+        </ul>
+      <% end %> 
+     </div>
+    <div class='row'>
+     <div class='col-md-3'>
+      <h2>User info</h2>
+      <table class='table'>
+       <tr><%= image_tag current_user.get_profile_image(100,100), class:"attachment user profile_image fallback" %></tr>
+       <tr>
+        <th>name</th>
+        <th><%= current_user.name %></th>
+       </tr>
+       <tr>
+        <th>introduction</th>
+        <th><%= current_user.introduction %></th>
+       </tr>
+      </table>
+      <div class='row'>
+       <%= link_to edit_user_path(current_user.id), class:"btn btn-outline-secondary btn-block" do %>
+       <i class="fas fa-user-cog"></i>
+       <% end %>
+      </div>
+      <div>
+       <%= render 'books/new', book: @book %>
+      </div>
+     </div>
+     
 
+     <div class='col-md-8 offset-md-1'>
 <h1>Users</h1>
-<table>
+<table class='table'>
  <thead>
    <tr>
     <th>
@@ -25,7 +65,7 @@
 <% @users.each do |user| %>
  <tr>
     <td>
-     <%= image_tag user.get_profile_image(50,50) %>
+     <%= image_tag user.get_profile_image(50,50), class:"attachment user profile_image fallback" %>
     </td>
     <td>
      <%= user.name %>
@@ -41,3 +81,10 @@
 <% end %>
 </tbody>
 </table>
+</div>
+     
+    </div>
+   </div>
+  </main>
+ </body>
+</html>

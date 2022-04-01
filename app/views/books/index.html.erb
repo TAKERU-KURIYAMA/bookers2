@@ -12,6 +12,16 @@
   <main>
    <p id="notice"></p>
    <div class='container px-5 px-sm-0'>
+     <div>
+      <% if @book.errors.any? %>
+       <%= @book.errors.count %>errors prohibited this obj from being saved:
+        <ul>
+       <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+       <% end %>
+        </ul>
+      <% end %> 
+     </div>
     <div class='row'>
      <div class='col-md-3'>
       <h2>User info</h2>
@@ -30,6 +40,9 @@
        <%= link_to edit_user_path(current_user.id), class:"btn btn-outline-secondary btn-block" do %>
        <i class="fas fa-user-cog"></i>
        <% end %>
+      </div>
+      <div>
+       <%= render 'books/new', book: @book %>
       </div>
      </div>
      
@@ -69,9 +82,7 @@
        </tbody>
       </table>
      </div>
-     <div>
-      <%= render 'books/new', book: @book %>
-     </div>
+     
     </div>
    </div>
   </main>
