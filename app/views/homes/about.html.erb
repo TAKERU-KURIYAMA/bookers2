@@ -9,7 +9,11 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-<p id="notice"></p>
+<% if flash[:notice] %>
+     <p id="notice">
+       <%= flash[:notice] %>
+     </p>
+   <% end %>
         <div class='container'>
   <div class='row'>
     <h1 class="px-3 mx-auto">Welcome to <i class="fas fa-book"></i><strong>Bookers</strong>!</h1>
